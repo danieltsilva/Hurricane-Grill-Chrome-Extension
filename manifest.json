@@ -16,6 +16,18 @@
     "default_icon": "hg-logo.png"
   },
   "background": {
-    "scripts": ["background.js"]
-  }
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "905944902965-k379qddub6neurqf0r2dalq786rpjc6u.apps.googleusercontent.com",
+    "scopes":[
+      "https://www.googleapis.com/auth/calendar",
+      "https://www.googleapis.com/auth/calendar.events"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhrEw1OBxIuLEuDpecuMzDqdqC3owPiSuS4aXKhgog4l1QCtiMdoXN8VnntosMZmAPU6n+/lS9UoMcItOnKJPD3yu8GEz2qfmgL1dfJvB1BwDN8JmZUT18TaSLi+d9aXouBfzYuP6a9Kad9aW4TeSLC03gT1sqxUTEXF/5UvL9l9cFQaouhfC/ygEVlAUuc4soqsrUTLtawU88cLMbe/BZ3jxeu7uMR1g/ikGll6bXoIUEWHQKXdN7PwyB67C1o8QxjpvQGBSGk0IIR8bI/204XdFc/E5yXCQOB0qLz/S+nvV9R01RGzaHrXbutuxYRzDoR/tTrziwtpari595rV5bQIDAQAB"
 }
