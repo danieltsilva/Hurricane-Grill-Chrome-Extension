@@ -51,7 +51,7 @@ window.onload = function() {
       console.log('I say a little pray for yooouuuu!')
 
       let init = {
-        method: 'GET',
+        method: 'POST',
         async: true,
         headers: {
           Authorization: 'Bearer ' + token,
@@ -60,7 +60,7 @@ window.onload = function() {
         'contentType': 'json'
       };
       fetch(
-          'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(CALENDAR_ID_WORK) + '/events?key=' + API_KEY,
+          'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(CALENDAR_ID_WORK) + '/events/quickAdd?' + 'text=Textandiu' + '&key=' + API_KEY,
           init)
           .then((response) => response.json())
           .then(function(data) {
