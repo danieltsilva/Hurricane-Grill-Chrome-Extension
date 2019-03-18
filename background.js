@@ -8,7 +8,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.sendMessage(activeTab.id, {"message": "clicked_browser_action"});
   });
 
-  chrome.tabs.create({url: 'index.html'});
+  //chrome.tabs.create({url: 'index.html'});
   
   chrome.identity.getAuthToken({interactive: true}, function(token) {
     console.log(token);
