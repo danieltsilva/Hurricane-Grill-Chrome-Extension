@@ -63,9 +63,13 @@ window.onload = function() {
   });
 
   document.getElementById('fetchBtn').addEventListener('click', function() {
-    
-    
 
   });
 
 };
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(request);
+  }
+);

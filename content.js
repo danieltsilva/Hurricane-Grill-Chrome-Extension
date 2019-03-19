@@ -58,15 +58,9 @@ var createEventJson = (date, start, end, role) => {
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if( request.message === "clicked_browser_action" ) {
-      console.log(convertTableToJson());
+      var rosterEvents = convertTableToJson();
+      console.log(rosterEvents);
+      sendResponse({events: "rosterEvents"});
     }
   }
 );
-
-
-// Refer to the JavaScript quickstart on how to setup the environment:
-// https://developers.google.com/calendar/quickstart/js
-// Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
-// stored credentials.
-var CLIENT_ID = '905944902965-k379qddub6neurqf0r2dalq786rpjc6u.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyDsjIwrvc61c2Ckm6rHPSBNRoRBim_yw44';
