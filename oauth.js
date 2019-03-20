@@ -71,5 +71,8 @@ window.onload = function() {
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(request);
+    // if( request.message === "roster" ) {
+    //   console.log(request);
+    // };
   }
 );

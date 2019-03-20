@@ -18,6 +18,15 @@ var MONTHS = {
 var TIMEZONE_SYDNEY = 'Australia/Sydney';
 var TIMEZONE_SAOPAULO = 'America/Sao_Paulo';
 
+var roster = {};
+var rosterDate = '';
+var rosterEvents = [];
+
+var convertToDateFormat = (stringDate) => {
+  let dateSplitted = stringDate.split(" ");
+  return dateSplitted[2] + '-' + MONTHS[dateSplitted[1]] + '-' + dateSplitted[0];
+};
+
 var convertTableToJson = () => {
     var rows = [];
     $('#_content_ctl11__gridPersonalRoster tr').slice(1).each(function(i, n){
@@ -30,7 +39,16 @@ var convertTableToJson = () => {
           $row.find('td:eq(3)').text().trim()
         ));
     });
-    return JSON.stringify(rows);
+
+    //TODO Fix double information
+    //double info
+    rosterEvents = rows;
+    rosterDate = convertToDateFormat($('#_content_ctl11__filtersPersonal__lblStartDate').html());
+
+    //double info
+    roster[rosterDate] = rosterEvents;
+
+    return rosterDate;
 };
 
 var createEventJson = (date, start, end, role) => {
@@ -57,10 +75,10 @@ var createEventJson = (date, start, end, role) => {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if( request.message === "clicked_browser_action" ) {
-      var rosterEvents = convertTableToJson();
-      console.log(rosterEvents);
-      sendResponse({events: "rosterEvents"});
+    if( request.message === "parse-week" ) {
+      let rd = convertTableToJson()
+      sendResponse( { "week-parsed" : roster[rd] } );
     }
   }
 );
+
