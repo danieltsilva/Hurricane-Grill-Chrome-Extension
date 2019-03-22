@@ -1,36 +1,33 @@
 // background.js
-var roster = [];
-var newTabId = 0;
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 
 // Called when the user clicks on the browser action.
-chrome.browserAction.onClicked.addListener(function(tab, roster) {
+chrome.browserAction.onClicked.addListener(function(tab) {
+  var roster = [];
+  var newTabId = 0;
 
   // Send a message to the active tab
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs, roster) {
-    var activeTab = tabs[0];      
-    chrome.tabs.sendMessage(activeTab.id, {"message": "parse-week"}, function(response, roster) {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, {"message": "parse-week"}, function(response) {
       roster = response["week-parsed"];
+      chrome.extension.getBackgroundPage().console.log("Creating my roster!");
+      chrome.extension.getBackgroundPage().console.log(roster); //AQUI TENHO MEU roster
     });
   });
 
   // Create a new tab
   chrome.tabs.create({url: 'index.html'}, function(tab){
     newTabId = tab.id;
-    chrome.extension.getBackgroundPage().console.log(newTabId);
+    chrome.extension.getBackgroundPage().console.log("Inside the CreateTab function");
+    chrome.extension.getBackgroundPage().console.log(roster); //AQUI JA NAO TENHO MEU ROSTER
   });
 
   // Sending messages from background / event page
   chrome.tabs.onUpdated.addListener(function(newTabId, changeInfo, tab) {
     if (changeInfo.status == 'complete') {
-        chrome.tabs.query({ active: true }, function(tabs) {
-            const msg = "Hello from background ?";
-            chrome.tabs.sendMessage(tabs[0].id, { "message": msg });
-        })
+        chrome.extension.getBackgroundPage().console.log("Inside the onUpdated Listener");
+        chrome.extension.getBackgroundPage().console.log(roster); //AQUI QUE EU PRECISO DO MEU ROSTER, MAS SÓ DÁ UNDEFINED
+        chrome.tabs.sendMessage(newTabId, { "roster": roster });
     }
   });
 

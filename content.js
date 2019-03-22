@@ -15,69 +15,70 @@ var MONTHS = {
   'Dec': '12',
 }
 
-var TIMEZONE_SYDNEY = 'Australia/Sydney';
-var TIMEZONE_SAOPAULO = 'America/Sao_Paulo';
+// var TIMEZONE_SYDNEY = 'Australia/Sydney';
+// var TIMEZONE_SAOPAULO = 'America/Sao_Paulo';
 
-var roster = {};
-var rosterDate = '';
-var rosterEvents = [];
+// var convertToDateFormat = (stringDate) => {
+//   let dateSplitted = stringDate.split(" ");
+//   return dateSplitted[2] + '-' + MONTHS[dateSplitted[1]] + '-' + dateSplitted[0];
+// };
 
-var convertToDateFormat = (stringDate) => {
-  let dateSplitted = stringDate.split(" ");
-  return dateSplitted[2] + '-' + MONTHS[dateSplitted[1]] + '-' + dateSplitted[0];
-};
-
+// Parsing the table and creating a JSON with it
 var convertTableToJson = () => {
-    var rows = [];
-    $('#_content_ctl11__gridPersonalRoster tr').slice(1).each(function(i, n){
-        var $row = $(n);
-        dateSplitted = $row.find('td:eq(0)').text().trim().split(" ");
-        rows.push(createEventJson(
-          MONTHS[dateSplitted[1]] + '-' + dateSplitted[2],
-          $row.find('td:eq(1)').text().trim(),
-          $row.find('td:eq(2)').text().trim(),
-          $row.find('td:eq(3)').text().trim()
-        ));
-    });
+  var roster = {};
 
-    //TODO Fix double information
-    //double info
-    rosterEvents = rows;
-    rosterDate = convertToDateFormat($('#_content_ctl11__filtersPersonal__lblStartDate').html());
+  $('#_content_ctl11__gridPersonalRoster tr').slice(1).each(function(i, n){
 
-    //double info
-    roster[rosterDate] = rosterEvents;
+    var $row = $(n);
+    dateSplitted = $row.find('td:eq(0)').text().trim().split(" ");
 
-    return rosterDate;
-};
-
-var createEventJson = (date, start, end, role) => {
-  return JSON.stringify({
-    'summary': role,
-    'location': 'Hurricane\'s Grill Circular Quay, Level 2 Gateway Sydney, Alfred St, Sydney NSW 2000, Australia',
-    'description': role + 'shift.\n\nAutomatically generated event.',
-    'start': {
-      'dateTime': '2019-' + date + 'T' + start + ':00-07:00',
-      'timeZone': TIMEZONE_SYDNEY
-    },
-    'end': {
-      'dateTime': '2019-' + date + 'T' + end + ':00-07:00',
-      'timeZone': TIMEZONE_SYDNEY
-    },
-    'reminders': {
-      'useDefault': false,
-      'overrides': [
-        {'method': 'popup', 'minutes': 60}
-      ]
-    }
+    var shift = {};
+    shift.date = {
+      text: $row.find('td:eq(0)').text().trim(),
+      month: MONTHS[dateSplitted[1]],
+      day: dateSplitted[2]
+    };
+    shift.time = {
+      start: $row.find('td:eq(1)').text().trim(),
+      end: $row.find('td:eq(2)').text().trim()
+    };
+    shift.role = $row.find('td:eq(3)').text().trim();
+    
+    roster[i] = shift;
   });
+
+  return roster;
 };
 
+// var createEventJson = (date, start, end, role) => {
+//   return JSON.stringify({
+//     'summary': role,
+//     'location': 'Hurricane\'s Grill Circular Quay, Level 2 Gateway Sydney, Alfred St, Sydney NSW 2000, Australia',
+//     'description': role + ' shift. Automatically generated event.',
+//     'start': {
+//       'dateTime': '2019-' + date + 'T' + start + ':00-07:00',
+//       'timeZone': TIMEZONE_SYDNEY
+//     },
+//     'end': {
+//       'dateTime': '2019-' + date + 'T' + end + ':00-07:00',
+//       'timeZone': TIMEZONE_SYDNEY
+//     },
+//     'reminders': {
+//       'useDefault': false,
+//       'overrides': [
+//         {'method': 'popup', 'minutes': 60}
+//       ]
+//     }
+//   });
+// };
+
+// Listener to trigger the roster parsing
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if( request.message === "parse-week" ) {
-      let rd = convertTableToJson()
-      sendResponse( { "week-parsed" : roster[rd] } );
+      let roster = convertTableToJson();
+      console.log(roster);
+      sendResponse( { "week-parsed" : roster } );
     }
   }
 );

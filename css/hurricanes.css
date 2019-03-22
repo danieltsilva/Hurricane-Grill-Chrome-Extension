@@ -1,0 +1,8 @@
+#root {
+    margin: 35px;
+}
+
+.ui.grid>* {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}

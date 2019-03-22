@@ -1,22 +1,85 @@
-<!-- Copyright 2018 The Chromium Authors. All rights reserved.
-Use of this source code is governed by a BSD-style license that can be
-found in the LICENSE file. -->
-
 <html>
+
   <head>
-    <title>FriendBlock</title>
-    <style>
-      button {
-        padding: 10px;
-        background-color: #3C79F8;
-        display: inline-block;
-        }
-    </style>
-    <script type="text/javascript" src="oauth.js"></script>
+      <meta charset="utf-8">
+      <title>(ツ) Hurricane Hack</title>
+      <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+      <link rel="stylesheet" type="text/css" href="css/hurricanes.css">
+      <script type="text/javascript" src="lib/jquery-3.3.1.min.js"></script>
+      <script type="text/javascript" src="oauth.js"></script>
   </head>
+
   <body>
-    <button id="sampleBtn">Create sample event</button>
-    <button id="fetchBtn">Fecth data from ESS</button>
-    <div id="friendDiv"></div>
+      <div id="root">
+          <div class="ui fluid container segment">
+              <h2 class="ui header">Week shifts</h2>
+
+              <div class="extra content"><button id="btn" class="ui button">Add Google Calendar</button></div>
+
+              <!-- Placeholder -->
+              <div id="placeholder" class="ui four column stackable grid">
+                <div class="column">
+                  <div class="ui raised segment">
+                    <div class="ui placeholder">
+                      <div class="image header">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                      </div>
+                      <div class="paragraph">
+                        <div class="medium line"></div>
+                        <div class="short line"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui raised segment">
+                    <div class="ui placeholder">
+                      <div class="image header">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                      </div>
+                      <div class="paragraph">
+                        <div class="medium line"></div>
+                        <div class="short line"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui raised segment">
+                    <div class="ui placeholder">
+                      <div class="image header">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                      </div>
+                      <div class="paragraph">
+                        <div class="medium line"></div>
+                        <div class="short line"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui raised segment">
+                    <div class="ui placeholder">
+                      <div class="image header">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                      </div>
+                      <div class="paragraph">
+                        <div class="medium line"></div>
+                        <div class="short line"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="shifts" class="ui five column stackable grid"></div>
+
+          </div>
+      </div>
   </body>
+
 </html>
