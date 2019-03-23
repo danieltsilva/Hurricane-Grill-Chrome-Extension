@@ -1,0 +1,12 @@
+html,
+body {
+    height: 50px;
+}
+
+body {
+    background: rgba(0,0,0,.87);
+}
+
+#root {
+    margin: 5px;
+}

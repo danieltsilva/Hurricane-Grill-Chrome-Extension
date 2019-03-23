@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Hurricane's Calendar Extension",
-  "version": "0.2",
+  "version": "1.0",
   "description": "Send Hurricane's Roster to your Google Calendar.",
   "icons": { "16": "img/hg-logo.png", "48": "img/hg-logo.png", "128": "img/hg-logo.png" },
   "content_scripts": [
@@ -19,10 +19,17 @@
     }
   ],
   "browser_action": {
-    "default_icon": "img/hg-logo.png"
+    "browser_style": true,
+    "default_popup": "popup/main.html",
+    "default_icon": {
+      "16": "img/hg-logo.png",
+      "32": "img/hg-logo.png"
+    }
   },
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
   "permissions": [

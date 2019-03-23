@@ -1,5 +1,4 @@
 // content.js
-
 var MONTHS = {
   'Jan': '01',
   'Feb': '02',
@@ -15,15 +14,6 @@ var MONTHS = {
   'Dec': '12',
 }
 
-// var TIMEZONE_SYDNEY = 'Australia/Sydney';
-// var TIMEZONE_SAOPAULO = 'America/Sao_Paulo';
-
-// var convertToDateFormat = (stringDate) => {
-//   let dateSplitted = stringDate.split(" ");
-//   return dateSplitted[2] + '-' + MONTHS[dateSplitted[1]] + '-' + dateSplitted[0];
-// };
-
-// Parsing the table and creating a JSON with it
 var convertTableToJson = () => {
   var roster = {};
 
@@ -49,28 +39,6 @@ var convertTableToJson = () => {
 
   return roster;
 };
-
-// var createEventJson = (date, start, end, role) => {
-//   return JSON.stringify({
-//     'summary': role,
-//     'location': 'Hurricane\'s Grill Circular Quay, Level 2 Gateway Sydney, Alfred St, Sydney NSW 2000, Australia',
-//     'description': role + ' shift. Automatically generated event.',
-//     'start': {
-//       'dateTime': '2019-' + date + 'T' + start + ':00-07:00',
-//       'timeZone': TIMEZONE_SYDNEY
-//     },
-//     'end': {
-//       'dateTime': '2019-' + date + 'T' + end + ':00-07:00',
-//       'timeZone': TIMEZONE_SYDNEY
-//     },
-//     'reminders': {
-//       'useDefault': false,
-//       'overrides': [
-//         {'method': 'popup', 'minutes': 60}
-//       ]
-//     }
-//   });
-// };
 
 // Listener to trigger the roster parsing
 chrome.runtime.onMessage.addListener(
