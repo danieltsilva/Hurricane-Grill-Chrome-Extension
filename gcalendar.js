@@ -13,7 +13,6 @@ var LOCALE_SAOPAULO = {
   offset: '-03:00'
 };
 
-//TODO Fazer a porra da funcao de conversao do tempo pro Google
 var createEventGoogleCalendar = (shift, locale) => {
   return {
     'summary': shift.role,
@@ -37,21 +36,8 @@ var createEventGoogleCalendar = (shift, locale) => {
 };
 
 var correctDayWithOffset = (day, offset) => {
+  //FIXME problem with 1st of the month
   return parseInt(offset.split(":")[0])<-12 ? day - 1 : day;
-};
-
-var event = {
-  'summary': 'TESTE',
-  'location': 'Hurricane\'s Grill Circular Quay, Level 2 Gateway Sydney, Alfred St, Sydney NSW 2000, Australia',
-  'description': 'A chance to hear more about Google\'s developer products.',
-  'start':  {'dateTime': "2019-03-23T16:00:00-07:00", 'timeZone': "Australia/Sydney"},
-  'end':    {'dateTime': "2019-03-23T22:00:00-07:00", 'timeZone': "Australia/Sydney"},
-  'reminders': {
-    'useDefault': false,
-    'overrides': [
-      {'method': 'popup', 'minutes': 60}
-    ]
-  }
 };
 
 var roster = {};
@@ -63,8 +49,6 @@ var loadRoster = roster => {
   var shifts = $('#shifts');
 
   $.each(roster, function(i,shift){
-    console.log(i);
-    console.log(shift.role);
     var shiftCard = '<div column><div class="ui card"><div class="content"><i class="right floated big address book icon"></i><div class="header">' +
                     shift.role +
                     '</div></div><div class="content"><h4 class="ui sub header">' +
@@ -98,9 +82,6 @@ $(function() {
     var endpoint = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(CALENDAR_ID_WORK) + '/events/?key=' + API_KEY;
     
     chrome.identity.getAuthToken({interactive: true}, function(token) {
-      console.log(roster);
-      console.log(shiftIndex);
-      console.log(roster[shiftIndex]);
       $.ajax({
           type: "POST",
           url: endpoint,
@@ -119,7 +100,6 @@ $(function() {
           }
       });
     });
-    console.log('saiu.');
   });
 });
 
