@@ -1,7 +1,7 @@
 'use strict';  
 
-var API_KEY = 'AIzaSyDsjIwrvc61c2Ckm6rHPSBNRoRBim_yw44';
-var CALENDAR_ID_PRIMARY = 'eugostodequeijadinhadequeijo@gmail.com';
+var API_KEY = '<GOOGLE-API-KEY>';
+var CALENDAR_ID_PRIMARY = 'me';
 var CALENDAR_ID_WORK = '832fm0rrd8pr869c4e7vnhlh8c@group.calendar.google.com';
 
 var LOCALE_SYDNEY = {

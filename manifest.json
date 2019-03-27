@@ -36,7 +36,7 @@
     "identity"
   ],
   "oauth2": {
-    "client_id": "905944902965-k379qddub6neurqf0r2dalq786rpjc6u.apps.googleusercontent.com",
+    "client_id": "<GOOGLE-CLIENT-ID>",
     "scopes":[
       "https://www.googleapis.com/auth/calendar",
       "https://www.googleapis.com/auth/calendar.events",
